@@ -1,13 +1,34 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+
+<h2>
   <strong>Name:</strong>
   <%= @brewery.name %>
+</h2>
+
+</p>
+<p>
+  Oluiden lukumäärä:
+  <%= @brewery.beers.count%>
 </p>
 
 <p>
   <strong>Year:</strong>
-  <%= @brewery.year %>
+  <i><%= @brewery.year %></i>
+</p>
+
+<h2>
+  Oluet:
+</h2>
+
+<p>
+
+  <% @brewery.beers.each do |beer| %>
+    <li>
+      <%= link_to beer.name, beer %>
+    </li>
+  <% end %>
 </p>
 
 <%= link_to 'Edit', edit_brewery_path(@brewery) %> |
