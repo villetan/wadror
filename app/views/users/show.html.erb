@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Username:</strong>
+  <%= @user.username %>
+</p>
+<p>
+  Arvostetuja oluita: <%= @user.ratings.count %>
+</p>
+<p>
+  <% if not @user.ratings.empty? %>
+      Arvostelujen keskiarvo: <%= @user.average_rating%>
+    <h2>
+      Ratings:
+    </h2>
+    <% @user.ratings.each do |rating| %>
+        <li> <%= rating %>  <%= link_to 'delete', rating, method: :delete, data: { confirm: 'Are you sure?' } %> </li>
+    <% end %>
+  <% end %>
+</p>
+
+
+
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>

@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :memberships
+  resources :beer_clubs
+  resources :users
   resources :beers
   resources :breweries
   get '/', to: 'breweries#index'  # The priority is based upon order of creation: first created -> highest priority.
@@ -7,6 +10,11 @@ Rails.application.routes.draw do
  # get 'ratings/new', to:'ratings#new'
   #post 'ratings', to: 'ratings#create'
   resources :ratings, only: [:index, :new, :create, :destroy]
+  get 'signup', to: 'users#new'
+  resource :session, only: [:new, :create, :delete]
+  get 'signin', to: 'sessions#new'
+  delete 'signout', to: 'sessions#destroy'
+
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
