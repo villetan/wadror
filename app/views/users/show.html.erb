@@ -14,13 +14,30 @@
       Ratings:
     </h2>
     <% @user.ratings.each do |rating| %>
-        <li> <%= rating %>  <%= link_to 'delete', rating, method: :delete, data: { confirm: 'Are you sure?' } %> </li>
+
+        <li>
+          <%= rating %>
+          <% if @user == current_user %>
+              <%= link_to 'delete', rating, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% end %>
+        </li>
+
     <% end %>
-  <% end %>
+<% end %>
+
+
+</p>
+<p>
+<h2>Olutseurat:</h2>
+<% @user.beer_clubs.each do |beer_club|%>
+  <li> <%=link_to beer_club.name, beer_club%> </li>
+<% end %>
 </p>
 
 
 
-
+<% if @user==current_user%>
 <%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<%= link_to 'Back', users_path %> |
+<%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>
