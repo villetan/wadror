@@ -17,7 +17,7 @@
     <br>
   </div>
   <div class="field">
-    <%= f.select :beer_club_id, options_from_collection_for_select(@beer_clubs, :id, :name) %><br>
+    <%= f.select :beer_club_id, options_from_collection_for_select(BeerClub.all.select{|bc| not bc.users.pluck(:user_id).include? current_user.id}, :id, :name) %><br>
   </div>
   <div class="actions">
     <%= f.submit %>

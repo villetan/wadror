@@ -14,6 +14,25 @@ class User < ActiveRecord::Base
   has_many :memberships, dependent: :destroy
   has_many :beer_clubs, through: :memberships
 
+  def favorite_beer
+    return nil if ratings.empty?
+    ratings.order(score: :desc).limit(1).first.beer
+  end
+
+  def favorite_style
+    ratings.group_by{|ra| ra.beer.style}
+        .map{|s,r| {s => r.map(&:score).sum / r.size.to_f}}
+        .max_by{|k,v| v}.keys.first rescue nil
+  end
+
+  def favorite_brewery
+    return nil if ratings.empty?
+    best_brewery_id=ratings.group_by{|ra| ra.beer.brewery.id}.map{|s,r| {s=> r.map(&:score).sum / r.size.to_f}}.max_by{|k,v| v}.keys.first
+    Brewery.all.select{|b| b.id==best_brewery_id}.first
+  end
+
+
+
 
 
 end

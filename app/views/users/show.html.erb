@@ -41,3 +41,7 @@
 <%= link_to 'Back', users_path %> |
 <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %>
 <% end %>
+
+favorite beer: <%= @user.favorite_beer%><br>
+favorite style: <%= @user.favorite_style%><br>
+favorite brewery: <%= @user.favorite_brewery.name%>
