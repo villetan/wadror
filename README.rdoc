@@ -1,1 +1,3 @@
 https://kalja.herokuapp.com
+
+https://travis-ci.org/villetan/wadror
