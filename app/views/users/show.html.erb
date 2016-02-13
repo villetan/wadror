@@ -5,7 +5,7 @@
   <%= @user.username %>
 </p>
 <p>
-  Arvostetuja oluita: <%= @user.ratings.count %>
+  Arvosteltuja oluita: <%= @user.ratings.count %>
 </p>
 <p>
   <% if not @user.ratings.empty? %>
@@ -28,20 +28,29 @@
 
 </p>
 <p>
-<h2>Olutseurat:</h2>
-<% @user.beer_clubs.each do |beer_club|%>
-  <li> <%=link_to beer_club.name, beer_club%> </li>
-<% end %>
+  <% if not @user.beer_clubs.nil? %>
+    <h2>Olutseurat:</h2>
+    <% @user.beer_clubs.each do |beer_club|%>
+        <li> <%=link_to beer_club.name, beer_club%> </li>
+    <% end %>
+<% end%>
 </p>
 
 
 
 <% if @user==current_user%>
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %> |
-<%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <%= link_to 'Edit', edit_user_path(@user) %> |
+    <%= link_to 'Back', users_path %> |
+    <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %>
 <% end %>
+<br>
 
-favorite beer: <%= @user.favorite_beer%><br>
-favorite style: <%= @user.favorite_style%><br>
-favorite brewery: <%= @user.favorite_brewery.name%>
+<%if not @user.favorite_beer.nil? %>
+Favorite beer: <%= @user.favorite_beer%><br>
+    <%end%>
+<% if not @user.favorite_style.nil? %>
+Favorite style: <%= @user.favorite_style%><br>
+    <%end%>
+<% if not @user.favorite_brewery.nil? %>
+Favorite brewery: <%= @user.favorite_brewery.name%>
+<%end%>

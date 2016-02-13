@@ -76,61 +76,61 @@ RSpec.describe User, type: :model do
 
 end
 
-RSpec.describe User, type: :model do
-  describe "favorite style" do
-    let(:user){FactoryGirl.create(:user) }
 
-    it "returns nil if ratings empty" do
+describe "Favorite style" do
+  let(:user){FactoryGirl.create(:user) }
 
-      expect(user.favorite_style).to eq(nil)
+  it "returns nil if ratings empty" do
 
-    end
+    expect(user.favorite_style).to eq(nil)
 
-    it "is correct with one rating" do
-      fav=Beer.create name:"test", style:"Lager"
-      Rating.create score:50, beer:fav, user:user
-      expect(user.favorite_style).to eq('Lager')
-    end
+  end
 
-    it "is correct with multiple ratings" do
-      beer1=Beer.create name:"test", style:"Lager"
-      beer2=Beer.create name:"test1", style:"Porter"
-      beer3=Beer.create name:"test2", style:"Lager"
-      Rating.create score:1, beer:beer1, user:user
-      Rating.create score:49, beer:beer2, user:user
-      Rating.create score:1, beer:beer3, user:user
-      expect(user.favorite_style). to eq('Porter')
-    end
+  it "is correct with one rating" do
+    fav=Beer.create name:"test", style:"Lager"
+    Rating.create score:50, beer:fav, user:user
+    expect(user.favorite_style).to eq('Lager')
+  end
+
+  it "is correct with multiple ratings" do
+    beer1=Beer.create name:"test", style:"Lager"
+    beer2=Beer.create name:"test1", style:"Porter"
+    beer3=Beer.create name:"test2", style:"Lager"
+    Rating.create score:1, beer:beer1, user:user
+    Rating.create score:49, beer:beer2, user:user
+    Rating.create score:1, beer:beer3, user:user
+    expect(user.favorite_style). to eq('Porter')
   end
 end
 
-RSpec.describe User, type: :model do
-  describe "favorite brewery" do
-    let(:user){FactoryGirl.create(:user) }
 
 
-    it "returns nil if ratings empty" do
-      expect(user.favorite_brewery).to eq(nil)
-    end
+describe "Favorite brewery" do
+  let(:user){FactoryGirl.create(:user) }
 
-    it "return the only brewery if only one rated" do
-      brewery1= Brewery.create name:"asd", year:1999
-      beer1=Beer.create name:"test", style:"Lager", brewery:brewery1
-      Rating.create score:30, beer:beer1, user:user
-      expect(user.favorite_brewery.name).to eq(brewery1.name)
-    end
 
-    it "returns the brewery with the best average rating" do
-      brewery1= Brewery.create name:"asd", year:1999
-      brewery2= Brewery.create name:"kek", year:1999
-      beer1=Beer.create name:"test", style:"Lager", brewery:brewery1
-      beer2=Beer.create name:"skrikidii", style:"Lager", brewery:brewery2
-      Rating.create score:30, beer:beer1, user:user
-      Rating.create score:50, beer:beer2, user:user
-      expect(user.favorite_brewery.name).to eq(brewery2.name)
-    end
+  it "returns nil if ratings empty" do
+    expect(user.favorite_brewery).to eq(nil)
+  end
+
+  it "return the only brewery if only one rated" do
+    brewery1= Brewery.create name:"asd", year:1999
+    beer1=Beer.create name:"test", style:"Lager", brewery:brewery1
+    Rating.create score:30, beer:beer1, user:user
+    expect(user.favorite_brewery.name).to eq(brewery1.name)
+  end
+
+  it "returns the brewery with the best average rating" do
+    brewery1= Brewery.create name:"asd", year:1999
+    brewery2= Brewery.create name:"kek", year:1999
+    beer1=Beer.create name:"test", style:"Lager", brewery:brewery1
+    beer2=Beer.create name:"skrikidii", style:"Lager", brewery:brewery2
+    Rating.create score:30, beer:beer1, user:user
+    Rating.create score:50, beer:beer2, user:user
+    expect(user.favorite_brewery.name).to eq(brewery2.name)
   end
 end
+
 
 
 

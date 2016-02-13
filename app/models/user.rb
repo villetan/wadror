@@ -22,17 +22,15 @@ class User < ActiveRecord::Base
   def favorite_style
     ratings.group_by{|ra| ra.beer.style}
         .map{|s,r| {s => r.map(&:score).sum / r.size.to_f}}
-        .max_by{|k,v| v}.keys.first rescue nil
+        .max_by{|item| item.values}.keys.first rescue nil
   end
 
   def favorite_brewery
     return nil if ratings.empty?
-    best_brewery_id=ratings.group_by{|ra| ra.beer.brewery.id}.map{|s,r| {s=> r.map(&:score).sum / r.size.to_f}}.max_by{|k,v| v}.keys.first
+    best_brewery_id=ratings.group_by{|ra| ra.beer.brewery.id}.
+        map{|s,r| {s=> r.map(&:score).sum / r.size.to_f}}
+                        .max_by{|item| item.values}.keys.first
     Brewery.all.select{|b| b.id==best_brewery_id}.first
   end
-
-
-
-
 
 end
