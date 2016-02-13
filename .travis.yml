@@ -1,17 +1,15 @@
 language: ruby
-
 rvm:
- - 2.3.0
-  
+- 2.3.0
 script:
- - bundle exec rake db:migrate --trace
- - RAILS_ENV=test bundle exec rake db:migrate --trace
- - bundle exec rake db:test:prepare
- - bundle exec rspec -fd spec/
- 
-  deploy:
-  - provider: heroku
-  - app: your-app-name # optional if it's the same as your repo name
-  - api_key: "3c0cedd6-9b29-4dde-aaa1-0c71b39ae1f9"
- 
-
+- bundle exec rake db:migrate --trace
+- RAILS_ENV=test bundle exec rake db:migrate --trace
+- bundle exec rake db:test:prepare
+- bundle exec rspec -fd spec/
+deploy:
+  provider: heroku
+  api_key:
+    secure: oQTIcQsUGNo/xTOYiTwjL+dd1fG4S4JPNJ9Vjk3AGa2MiugRjhp58a3HlDll36FPcdDQqsakATomxr0MviZeMAwesDoKPGgFlbWjwiTzQlnGQf/eeXGu7+TImdSmAy9PbyvdZJZ6puInRmBD1eqHewc5lVbNtiymaF2M8T1JDdEYWeyZFMmZRuE4WNZEVEn9DFytGTW8LYvyZ89gW0/AFIpyNGaJkRMZSkC6/P8pB7CMUmTeHROd41XhBiubTOQ0wnwJk656kLsDAhpxxmsHnVczn6rsC8Opop4kvtps7KYYbwn+ydRfBthKZaJP5sp/1ybMfb670QOlSBs+TYzF04b8SGzV7lCFFWnUZuRlZuymvHlGD/YOV5ilRH8I0XV9kaaP17YreVYRh255L5oxZMoLewFXpAJBHwyVVMpPaMBmtKLIJalwwyOmP9heEpH+XDMMWcekirGCAOnXjw3STSNVORdlXpJwTGzolKzN2gQYPMp0sfcGT+75ABKsKZyysz5b9T6kua8QM0ybFuBjog3HT8KcUmDvPLv0z1gPqp3JDsCUTXkCbN5/HPWa7Z03wsV79CyRRegd867Glf5A+gMBQXOoEEUGuiKbiHbqi6eGwTo5orKo0OZrozRfs90rIVrcHCVHHbSQAGuYIpZ4tGo1rVL4G8dWQYErZNRs77c=
+  app: kalja
+  on:
+    repo: villetan/wadror

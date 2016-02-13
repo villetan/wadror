@@ -11,7 +11,7 @@ script:
  
   deploy:
   - provider: heroku
-  - app: your-app-name # optional if it's the same as your repo name
+  - app: kalja
   - api_key: "3c0cedd6-9b29-4dde-aaa1-0c71b39ae1f9"
  
 
