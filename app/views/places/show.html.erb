@@ -11,6 +11,8 @@
   <%=@place.city%>
 
 </p>
-
+<% if Rails.env.production?%>
 <iframe src=<%=@place.blogmap.sub! 'http', 'https'%> </iframe>
-
+    <%else%>
+    <iframe src=<%=@place.blogmap.sub! 'http', 'http'%> </iframe>
+<% end%>
