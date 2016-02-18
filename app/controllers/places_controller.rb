@@ -11,7 +11,6 @@ class PlacesController < ApplicationController
     place_id=params[:id]
 
     @place = Rails.cache.read("#{city}").select{|p| p.id==place_id}.first
-    byebug
     render :show
     #place.send(params) tämä kuulema viewiin?
   end
