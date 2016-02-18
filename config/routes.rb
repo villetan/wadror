@@ -5,8 +5,16 @@ Rails.application.routes.draw do
   resources :beers
   resources :breweries
   get '/', to: 'breweries#index'  # The priority is based upon order of creation: first created -> highest priority.
+  post 'places', to:'places#search'
+  get 'places', to: 'places#index'
   get 'kaikki_bisset', to: 'beers#index'
   get 'ratings', to: 'ratings#index'
+
+  resources :places, only:[:index, :show]
+  post 'places', to:'places#search'
+
+  get 'places/:city/:id',to: 'places#show'
+
  # get 'ratings/new', to:'ratings#new'
   #post 'ratings', to: 'ratings#create'
   resources :ratings, only: [:index, :new, :create, :destroy]
