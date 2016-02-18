@@ -12,7 +12,7 @@
 
 </p>
 <% if Rails.env.production?%>
-<iframe src=<%=@place.blogmap.sub! 'http', 'https'%> </iframe>
+<iframe src=<%=@place.blogmap.sub! 'http', 'http'%> </iframe>
     <%else%>
     <iframe src=<%=@place.blogmap.sub! 'http', 'http'%> </iframe>
 <% end%>
