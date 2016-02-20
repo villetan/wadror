@@ -87,19 +87,19 @@ describe "Favorite style" do
   end
 
   it "is correct with one rating" do
-    fav=Beer.create name:"test", style:"Lager"
+    fav=Beer.create name:"test", style:(Style.create name:"Lager")
     Rating.create score:50, beer:fav, user:user
-    expect(user.favorite_style).to eq('Lager')
+    expect(user.favorite_style.name).to eq('Lager')
   end
 
   it "is correct with multiple ratings" do
-    beer1=Beer.create name:"test", style:"Lager"
-    beer2=Beer.create name:"test1", style:"Porter"
-    beer3=Beer.create name:"test2", style:"Lager"
+    beer1=Beer.create name:"test", style:(Style.create name:"Lager")
+    beer2=Beer.create name:"test1", style:(Style.create name:"Weizen")
+    beer3=Beer.create name:"test2", style:(Style.all.find_by id:1)
     Rating.create score:1, beer:beer1, user:user
     Rating.create score:49, beer:beer2, user:user
     Rating.create score:1, beer:beer3, user:user
-    expect(user.favorite_style). to eq('Porter')
+    expect(user.favorite_style.name). to eq('Weizen')
   end
 end
 
@@ -115,7 +115,7 @@ describe "Favorite brewery" do
 
   it "return the only brewery if only one rated" do
     brewery1= Brewery.create name:"asd", year:1999
-    beer1=Beer.create name:"test", style:"Lager", brewery:brewery1
+    beer1=Beer.create name:"test", style:(Style.create name:"Lager"), brewery:brewery1
     Rating.create score:30, beer:beer1, user:user
     expect(user.favorite_brewery.name).to eq(brewery1.name)
   end
@@ -123,8 +123,8 @@ describe "Favorite brewery" do
   it "returns the brewery with the best average rating" do
     brewery1= Brewery.create name:"asd", year:1999
     brewery2= Brewery.create name:"kek", year:1999
-    beer1=Beer.create name:"test", style:"Lager", brewery:brewery1
-    beer2=Beer.create name:"skrikidii", style:"Lager", brewery:brewery2
+    beer1=Beer.create name:"test", style:(Style.create name:"Lager"), brewery:brewery1
+    beer2=Beer.create name:"skrikidii", style:(Style.create name:"Weizen"), brewery:brewery2
     Rating.create score:30, beer:beer1, user:user
     Rating.create score:50, beer:beer2, user:user
     expect(user.favorite_brewery.name).to eq(brewery2.name)

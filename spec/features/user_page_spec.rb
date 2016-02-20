@@ -7,7 +7,7 @@ describe "User page" do
 
   before :each do
     br=FactoryGirl.create(:brewery)
-    b=br.beers.create name:"testi", style:"Lager"
+    b=br.beers.create name:"testi", style:(Style.create name:"Lager")
     test=User.create username:"testi", password:"Testi1", password_confirmation:"Testi1"
     sign_in(username:"testi", password:"Testi1")
     b.ratings.create score:"50", user:test
@@ -43,7 +43,7 @@ page.first(:link, "delete").click
     visit user_path(user)
     expect(page).not_to have_content("testi 50")
     expect(page).to have_content("Favorite beer: #{user.beers.first}")
-    expect(page).to have_content("Favorite style: #{user.beers.first.style}")
+    expect(page).to have_content("Favorite style: #{user.beers.first.style.name}")
     expect(page).to have_content("Favorite brewery: #{user.beers.first.brewery.name}")
     #save_and_open_page
   end

@@ -49,7 +49,7 @@
 Favorite beer: <%= @user.favorite_beer%><br>
     <%end%>
 <% if not @user.favorite_style.nil? %>
-Favorite style: <%= @user.favorite_style%><br>
+Favorite style: <%= @user.favorite_style.name%><br>
     <%end%>
 <% if not @user.favorite_brewery.nil? %>
 Favorite brewery: <%= @user.favorite_brewery.name%>

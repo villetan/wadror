@@ -6,11 +6,13 @@ class BreweriesController < ApplicationController
   # GET /breweries.json
   def index
     @breweries = Brewery.all
+
   end
 
   # GET /breweries/1
   # GET /breweries/1.json
   def show
+
   end
 
   # GET /breweries/new

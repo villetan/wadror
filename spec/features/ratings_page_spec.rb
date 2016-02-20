@@ -7,7 +7,7 @@ describe "Ratings page" do
 
   it "shows the amount of ratings" do
     br=FactoryGirl.create(:brewery)
-    b=br.beers.create name:"testi", style:"Lager"
+    b=br.beers.create name:"testi", style:(Style.create name:"Lager")
     sign_in(username:"Pekka", password:"Foobar1")
     b.ratings.create score:"10", user:user
     b.ratings.create score:"11", user:user
