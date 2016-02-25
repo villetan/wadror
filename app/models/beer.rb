@@ -14,13 +14,21 @@ class Beer < ActiveRecord::Base
 
 
   #def average_rating
-    #summa=0
-    #ratings.each{|rating| summa+=rating.score}
-   # ratings.inject(0){|tulos, rating| tulos+rating.score}.fdiv(ratings.length)
+  #summa=0
+  #ratings.each{|rating| summa+=rating.score}
+  # ratings.inject(0){|tulos, rating| tulos+rating.score}.fdiv(ratings.length)
   #end
 
   def to_s
     "#{self.name}, #{self.brewery.name}"
   end
 
+  def self.top(n)
+    beers_with_ratings=Beer.all
+    #beers_with_ratings=Beer.select{|b| not  b.ratings.empty?}
+    best_beers = beers_with_ratings.sort_by{ |b| -(b.average_rating||0) }.take(n)
+  end
+
 end
+
+

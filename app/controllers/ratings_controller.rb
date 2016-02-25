@@ -1,5 +1,6 @@
 class RatingsController < ApplicationController
     def index
+    @recent_ratings=Rating.recent
     @ratings=Rating.all
     end
 

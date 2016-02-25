@@ -13,16 +13,28 @@
     <h2>
       Ratings:
     </h2>
-    <% @user.ratings.each do |rating| %>
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th>Beer</th>
+        <th>Rating</th>
 
-        <li>
-          <%= rating %>
-          <% if @user == current_user %>
-              <%= link_to 'delete', rating, method: :delete, data: { confirm: 'Are you sure?' } %>
-          <% end %>
-        </li>
+        <th colspan="3"></th>
+      </tr>
+      </thead>
 
-    <% end %>
+      <tbody>
+
+      <% @user.ratings.each do |rating| %>
+          <tr>
+            <td><%= link_to rating.beer.name, rating  %></td>
+            <td><%= rating.score %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+
 <% end %>
 
 
@@ -38,11 +50,7 @@
 
 
 
-<% if @user==current_user%>
-    <%= link_to 'Edit', edit_user_path(@user) %> |
-    <%= link_to 'Back', users_path %> |
-    <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %>
-<% end %>
+
 <br>
 
 <%if not @user.favorite_beer.nil? %>
@@ -54,3 +62,13 @@ Favorite style: <%= @user.favorite_style.name%><br>
 <% if not @user.favorite_brewery.nil? %>
 Favorite brewery: <%= @user.favorite_brewery.name%>
 <%end%>
+
+<br>
+
+
+<% if @user==current_user%>
+    <h2>Change user info:</h2>
+    <%= link_to 'Change password', edit_user_path(@user) %> |
+
+    <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>
