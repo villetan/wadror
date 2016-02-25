@@ -33,4 +33,9 @@ class User < ActiveRecord::Base
     Brewery.all.select{|b| b.id==best_brewery_id}.first
   end
 
+  def self.top(n)
+    highest_raters=User.all.sort_by{|u| -(u.ratings.count)}.take(n)
+
+  end
+
 end

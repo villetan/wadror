@@ -28,6 +28,34 @@
 <table class="table table-hover">
   <thead>
   <tr>
+    <th>Username</th>
+    <th>Favorite beer</th>
+    <th>Preferred Style</th>
+    <th>Favorite Brewery</th>
+    <th>Ratings</th>
+    <th colspan="3"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+
+  <% @top_users.each do |user| %>
+      <tr>
+        <td><%= link_to user.username, user  %></td>
+        <td><%= user.favorite_beer.name%></td>
+        <td><%= user.favorite_style.name %></td>
+        <td><%= user.favorite_brewery.name %></td>
+        <td><%= user.ratings.count%></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+
+<div class="col-xs-6"><h2>Recent ratings</h2></div>
+<table class="table table-hover">
+  <thead>
+  <tr>
     <th>Beer</th>
     <th>Time</th>
     <th>Rating</th>
