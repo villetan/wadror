@@ -65,7 +65,7 @@
   </thead>
 
   <tbody>
-  <p> Number of ratings: <%= @recent_ratings.count %> </p>
+
   <% @recent_ratings.each do |rating| %>
       <tr>
         <td><%= link_to rating.beer.name, rating  %></td>

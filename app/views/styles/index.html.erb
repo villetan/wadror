@@ -14,11 +14,12 @@
   <tbody>
     <% @styles.each do |style| %>
       <tr>
-        <td><%= style.name %></td>
+        <td><%= link_to style.name, style %></td>
         <td><%= style.description %></td>
-        <td><%= link_to 'Show', style %></td>
         <td><%= link_to 'Edit', edit_style_path(style) ,class:"btn btn-warning btn-xs" %></td>
+        <% if current_user.admin%>
         <td><%= link_to 'Destroy', style, method: :delete, data: { confirm: 'Are you sure?' } ,class:"btn btn-danger btn-xs" %></td>
+            <%end%>
       </tr>
     <% end %>
   </tbody>

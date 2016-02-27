@@ -13,8 +13,11 @@ describe "Ratings page" do
     b.ratings.create score:"11", user:user
     b.ratings.create score:"12", user:user
     visit ratings_path
-    expect(page).to have_content("Number of ratings: #{Rating.count}")
+    expect(page).to have_content("Best beers")
+    expect(page).to have_content("Best breweries")
+    expect(page).to have_content("Best styles")
     expect(Rating.count).to eq(3)
-    expect(page).to have_content("#{Rating.first}")
+    expect(page).to have_content("#{(Beer.where id:(Rating.first.beer_id)).first.name}")
+    expect(page).to have_content("#{Rating.first.score}")
   end
 end

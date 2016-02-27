@@ -11,7 +11,7 @@ describe "User page" do
     test=User.create username:"testi", password:"Testi1", password_confirmation:"Testi1"
     sign_in(username:"testi", password:"Testi1")
     b.ratings.create score:"50", user:test
-    click_on("Sign out")
+    click_link("signout")
     sign_in(username:"Pekka", password:"Foobar1")
     b.ratings.create score:"10", user:user
     b.ratings.create score:"11", user:user
@@ -33,9 +33,7 @@ describe "User page" do
 
   it "has a remove button that works" do
     visit user_path(user)
-
-
-page.first(:link, "delete").click
+    page.first(:link, "Delete").click
     expect(Rating.count).to eq(3)
   end
 

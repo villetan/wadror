@@ -2,7 +2,7 @@
   <thead>
   <tr>
     <th>Name</th>
-    <th>Year</th>
+    <th>Average</th>
   </tr>
   </thead>
 
@@ -10,7 +10,7 @@
   <% objects.each do |object| %>
       <tr>
         <td><%= link_to object.name, object %></td>
-        <td><%= object.average_rating %></td>
+        <td><%= round(object.average_rating) %></td>
         <td></td>
       </tr>
   <% end %>

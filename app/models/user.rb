@@ -20,22 +20,50 @@ class User < ActiveRecord::Base
   end
 
   def favorite_style
-    ratings.group_by{|ra| ra.beer.style}
-        .map{|s,r| {s => r.map(&:score).sum / r.size.to_f}}
-        .max_by{|item| item.values}.keys.first rescue nil
+    favorite :style
   end
 
   def favorite_brewery
-    return nil if ratings.empty?
-    best_brewery_id=ratings.group_by{|ra| ra.beer.brewery.id}.
-        map{|s,r| {s=> r.map(&:score).sum / r.size.to_f}}
-                        .max_by{|item| item.values}.keys.first
-    Brewery.all.select{|b| b.id==best_brewery_id}.first
+    favorite :brewery
   end
+
+  def rating_of(category, item)
+    ratings_of = ratings.select{ |r| r.beer.send(category)==item }
+    ratings_of.map(&:score).inject(&:+) / ratings_of.count.to_f
+  end
+
+  def favorite(category)
+    return nil if ratings.empty?
+
+    rated = ratings.map{ |r| r.beer.send(category) }.uniq
+    rated.sort_by { |item| -rating_of(category, item) }.first
+  end
+
+  # def favorite_style
+  #   ratings.group_by{|ra| ra.beer.style}
+  #       .map{|s,r| {s => r.map(&:score).sum / r.size.to_f}}
+  #       .max_by{|item| item.values}.keys.first rescue nil
+  # end
+  #
+  # def favorite_brewery
+  #   return nil if ratings.empty?
+  #   best_brewery_id=ratings.group_by{|ra| ra.beer.brewery.id}.
+  #       map{|s,r| {s=> r.map(&:score).sum / r.size.to_f}}
+  #                       .max_by{|item| item.values}.keys.first
+  #   Brewery.all.select{|b| b.id==best_brewery_id}.first
+  # end
 
   def self.top(n)
     highest_raters=User.all.sort_by{|u| -(u.ratings.count)}.take(n)
 
+  end
+
+  def status
+    if locked?
+      return "FROZEN"
+    else
+      return "Not frozen"
+    end
   end
 
 end

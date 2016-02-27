@@ -21,6 +21,15 @@ class UsersController < ApplicationController
   def edit
   end
 
+  def freeze_account
+    user=User.find(params[:id])
+    user.update_attribute :locked, (not user.locked)
+
+    new_status = user.locked? ? "locked" : "unlocked"
+
+    redirect_to :back, notice:"user status changed to #{new_status}"
+  end
+
   # POST /users
   # POST /users.json
   def create

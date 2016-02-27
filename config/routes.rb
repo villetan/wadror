@@ -2,9 +2,15 @@ Rails.application.routes.draw do
   resources :styles
   resources :memberships
   resources :beer_clubs
-  resources :users
+  resources :users do
+    post 'freeze_account', on: :member
+  end
   resources :beers
-  resources :breweries
+
+  resources :breweries do
+    post 'toggle_activity', on: :member
+  end
+
   get '/', to: 'breweries#index'  # The priority is based upon order of creation: first created -> highest priority.
   post 'places', to:'places#search'
   get 'places', to: 'places#index'
