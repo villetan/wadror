@@ -82,9 +82,9 @@
 
   <% if @user==current_user%>
       <h2>Change user info:</h2>
-      <%= link_to 'Change password', edit_user_path(@user) %> |
+      <%= link_to 'Change password', edit_user_path(@user), class:"btn btn-primary" %>
 
-      <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %>
+      <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?'}, class:"btn btn-danger"  %>
   <% end %>
   <% if current_user%>
       <% if current_user.admin %>
