@@ -4,24 +4,26 @@
 
 <table class="table table-hover">
   <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th colspan="3"></th>
-    </tr>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th colspan="3"></th>
+  </tr>
   </thead>
 
   <tbody>
-    <% @styles.each do |style| %>
+  <% @styles.each do |style| %>
       <tr>
         <td><%= link_to style.name, style %></td>
         <td><%= style.description %></td>
-        <td><%= link_to 'Edit', edit_style_path(style) ,class:"btn btn-warning btn-xs" %></td>
-        <% if current_user.admin%>
-        <td><%= link_to 'Destroy', style, method: :delete, data: { confirm: 'Are you sure?' } ,class:"btn btn-danger btn-xs" %></td>
+        <%if current_user %>
+            <td><%= link_to 'Edit', edit_style_path(style) ,class:"btn btn-warning btn-xs" %></td>
+            <% if current_user.admin%>
+                <td><%= link_to 'Destroy', style, method: :delete, data: { confirm: 'Are you sure?' } ,class:"btn btn-danger btn-xs" %></td>
             <%end%>
+        <%end%>
       </tr>
-    <% end %>
+  <% end %>
   </tbody>
 </table>
 

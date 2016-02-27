@@ -68,7 +68,7 @@
 
   <% @recent_ratings.each do |rating| %>
       <tr>
-        <td><%= link_to rating.beer.name, rating  %></td>
+        <td><%= link_to rating.beer.name, rating.beer  %></td>
         <td><%= rating.updated_at%></td>
         <td><%= rating.score %></td>
         <td><%= link_to rating.user.username, rating.user %></td>
