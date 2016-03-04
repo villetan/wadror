@@ -8,6 +8,44 @@ class BreweriesController < ApplicationController
   def index
     @active_breweries = Brewery.active
     @retired_breweries=Brewery.retired
+    order = params[:order] || 'name'
+    session[:sort]=false if(session[:sort]==nil)
+
+
+
+    @retired_breweries = case order
+                           when 'name'
+                             if(  session[:sort]==false)
+                               @retired_breweries.sort_by{ |b| b.name }
+                             else
+                               @retired_breweries.sort_by{ |b| b.name }.reverse
+
+                             end
+                           when 'year'
+                             if(session[:sort]==false)
+                             @retired_breweries.sort_by{ |b| b.year }
+                             else
+                               @retired_breweries.sort_by{ |b| b.name }.reverse
+                             end
+                         end
+    @active_breweries = case order
+                          when 'name'
+                            if( session[:sort]==false)
+                              session[:sort]=true
+                              @active_breweries.sort_by{ |b| b.name }
+                            else
+                              session[:sort]=false
+                              @active_breweries.sort_by{ |b| b.name }.reverse
+                            end
+                          when 'year'
+                            if(session[:sort]==false)
+                              session[:sort]=true
+                              @active_breweries.sort_by{ |b| b.year }
+                            else
+                              session[:sort]=false
+                              @active_breweries.sort_by{ |b| b.year }.reverse
+                            end
+                        end
 
   end
 
@@ -87,10 +125,10 @@ class BreweriesController < ApplicationController
     params.require(:brewery).permit(:name, :year, :active)
   end
   #def authenticate
-   # admin_accounts = { "admin" => "secret", "pekka" => "beer", "arto" => "foobar", "matti" => "ittam"}
-    #authenticate_or_request_with_http_basic do |username, password|
-     # admin_accounts.include?(username) and password == admin_accounts[username]
-    #end
+  # admin_accounts = { "admin" => "secret", "pekka" => "beer", "arto" => "foobar", "matti" => "ittam"}
+  #authenticate_or_request_with_http_basic do |username, password|
+  # admin_accounts.include?(username) and password == admin_accounts[username]
+  #end
   #end
 
 end

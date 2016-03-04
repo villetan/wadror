@@ -30,6 +30,8 @@ Rails.application.routes.draw do
   get 'signin', to: 'sessions#new'
   delete 'signout', to: 'sessions#destroy'
 
+  get 'beerlist', to:'beers#list'
+
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
