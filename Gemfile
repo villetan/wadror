@@ -38,6 +38,10 @@ gem 'httparty'
 
 gem 'jquery-turbolinks'
 
+gem 'selenium-webdriver'
+
+gem 'rack-mini-profiler'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
@@ -58,6 +62,7 @@ group :test do
   gem 'rspec-its'
   gem 'simplecov', require: false
   gem 'webmock'
+  gem 'database_cleaner'
 end
 gem 'bootstrap-sass'
 group :development do

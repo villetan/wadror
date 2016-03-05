@@ -22,6 +22,9 @@ Rails.application.routes.draw do
 
   get 'places/:city/:id',to: 'places#show'
 
+  get 'ngbeerlist', to:'beers#nglist'
+  get 'ngbrewerieslist', to: 'breweries#nglist'
+
  # get 'ratings/new', to:'ratings#new'
   #post 'ratings', to: 'ratings#create'
   resources :ratings, only: [:index, :new, :create, :destroy]
